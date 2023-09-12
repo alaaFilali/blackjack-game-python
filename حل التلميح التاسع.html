@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>حل التلميح التاسع</title>
+</head>
+
+<body>
+    <div class="book-page">
+        <h1 class="book-title">حل التلميح التاسع</h1>
+        <div class="content">
+            <p>
+                حل التلميح التاسع: سوف نقوم بمنادات الدالة 
+                calculate_score
+                واذا كان لدى المستخدم او الكمبيوتر
+                blackjack 
+                او 
+                ال 
+                score 
+                خاصته فوق 
+                21
+                سوف تنتهي اللعبة
+            </p>
+            <p>
+                سوف نقوم بمنادات الدالة بعد ان اعطينا اللاعبين ورقتين وتذكر انه يجب ان 
+                يكون تعريف الدالة قبل مناداتها 
+            </p>
+            <p>
+                سوف اخزن ال 
+                score 
+                الخاص باللاعب والكمبيوتر في متغيرين 
+                user_score 
+                و 
+                computer_score
+            </p>
+            <pre><code>
+user_score = calculate_score(user_cards)
+computer_score = calculate_score(computer_cards)
+            </code></pre>
+            <p>
+                الان سوف اتحقق ان كان لدى اللاعب او الكمبيوتر بلاك جاك او 
+                score 
+                الاعب فوق 
+                21
+                سوف انهي اللعبة باني اقلب قيمة متغير 
+                is_game_over 
+                اعرفه فوق
+            </p>
+            <pre><code>
+is_game_over = False
+...
+
+if user_score == 0 or computer_score == 0 or user_score > 21:
+    is_game_over = True
+            </code></pre>
+            <p>
+                ولكن في الحقيقة قلب قيمة هذا المتغير لن تنهي اللعبة الان 
+                لانه مجرد متغير 
+                boolean 
+                ولكننا نعد انفسنا لحل التلميحات القادمة
+                وسوف اضيف بعض عبارات الطباعة لاقوم بتجربة اللعبة كما هي الان
+            </p>
+            <pre><code>
+is_game_over = False
+
+user_score = calculate_score(user_cards)
+computer_score = calculate_score(computer_cards)
+
+print(f"   Your cards: {user_cards}, current score: {user_score}")
+print(f"   Computer's first card: {computer_cards[0]}")
+
+if user_score == 0 or computer_score == 0 or user_score > 21:
+    is_game_over = True
+            </code></pre>
+            <p>
+                نتيجة الكود حتى الان: 
+            </p>
+            <pre><code>
+    Your cards: [2, 6], current score: 8
+    Computer's first card: 10
+            </code></pre>
+            <p>
+                من الجيد ان نقوم بتجريب الكود الخاص بنا كل مرة لنتحقق ان كل شيء
+                يجري كما خطط له 
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
