@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>حل التلميح من السادس الى الثامن</title>
+</head>
+
+<body>
+    <div class="book-page">
+        <h1 class="book-title">حل التلميح من السادس الى الثامن</h1>
+        <div class="content">
+            <p>
+                حل التلميح السادس: سوف نقوم بكتابة دالة 
+                calculate_score
+                التي تأخذ قائمة اوراق كمدخل وترجع ال 
+                score 
+                وهو مجموع تلك الاوراق
+            </p>
+            <pre><code>
+def calculate_score(cards):
+    return sum(cards)
+            </code></pre>
+            <p>
+                لحساب ال 
+                score 
+                استعملت الدالة 
+                sum 
+                والتي ترجع مجموع العناصر في قائمة 
+                تذكر دائما انه يمكنك البحث عن اي دالة في ال 
+                documentation 
+                والقراءة عنها لفهمها اكثر وكيف تعمل وماهي المدخلات الممكنة لها
+            </p>
+            <p>
+                blackjack
+                هو وجود ورقتين في يد اللاعب 
+                10 
+                و الاس 
+                A 
+                فان كان ذلك علينا ارجاع الرقم 
+                0
+                ليمثله وليس مجموع الاوراق ولنفعل ذلك نحقق ان كان مجموع الاوراق 
+                21
+                وعدد الاوراق هو 
+                2
+                في تلك الحالة نحن نعلم يقينا ان تلكما الورقتان هي 
+                10 
+                و الاس 
+                لذلك نرجع 
+                0
+            </p>
+            <pre><code>
+def calculate_score(cards):
+
+    if sum(cards) == 21 and len(cards) == 2:
+        return 0
+
+    return sum(cards)
+            </code></pre>
+            <p>
+                حل التلميح الثامن علينا ان نتحقق من الرقم 
+                11
+                وهو الاس ان كان مجموع الاوراق فوق
+                21
+                علينا ان نبدل 
+                11
+                ب 
+                1
+                لان الاس يمكن ان تكون الاثنين
+            </p>
+            <pre><code>
+def calculate_score(cards):
+    """Take a list of cards and return the score calculated from the cards"""
+    
+    if sum(cards) == 21 and len(cards) == 2:
+        return 0
+    
+    if 11 in cards and sum(cards) > 21:
+        cards.remove(11)
+        cards.append(1)
+
+    return sum(cards)
+            </code></pre>
+            <p>
+                نحن نعلم كيف نضيف عنصر لقائمة ولكن كيف نحذف عنصر؟ يمكننا استعمال
+                الدالة 
+                remove 
+                ماذا تفعل هذه الاخيرة؟ تبحث عن القيمة المعطات لها كمدخل وتحذفها 
+                من القائمة ببساطة
+                وفي تلك الحالة نضيف الرقم 
+                1
+                للقائمة ونكون بذلك قد بدلنا 
+                11
+                ب 
+                1
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
