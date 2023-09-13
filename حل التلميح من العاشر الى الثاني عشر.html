@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>حل التلميح من العاشر الى الثاني عشر</title>
+</head>
+
+<body>
+    <div class="book-page">
+        <h1 class="book-title">حل التلميح من العاشر الى الثاني عشر</h1>
+        <div class="content">
+            <p>
+                الان سوف نبدأ بحل التليمح رقم 
+                10
+                ويقول اذا لم تنتهي اللعبة بعد اسأل اللاعب اذا كان يريد ان 
+                يسحب ورقة اخرى فاذا كانت الاجابة ب 
+                yes 
+                استعمل الدالة 
+                deal_card 
+                واضف ورقة اخرى الى قائمة
+                user_cards
+                واذا كانت الاجابة ب 
+                no 
+                فاللعبة انتهت
+            </p>
+            <p>
+                سوف اضيفها في ال 
+                else 
+                الخاصة بالتحقق ان كان لدى اللاعب او الكمبيوتر 
+                black jack 
+                سوف اسأل اللاعب وبناءا على ااجابته سوف اما اضيف ورقة جديدة او انهي اللعبة
+            </p>
+            <pre><code>
+if user_score == 0 or computer_score == 0 or user_score > 21:
+    is_game_over = True
+else:
+    user_should_deal = input("Type 'y' to get another card, type 'n' to pass: ")
+    if user_should_deal == "y":
+        user_cards.append(deal_card())
+    else:
+        is_game_over = True
+            </code></pre>
+            <p>
+                كما قلنا سابقا حاول في كل مرة تضيف شيئا في الكود الخاص بك ان تجربه
+                فربما نسيت شيئا او ظهر
+                bug 
+                معين ولم تنتبه له 
+            </p>
+            <p>
+                الان نريد من اللعبة الخاصة بنا ان تكرر نفسها ففي التلميح ال
+                11
+                يخبرنا ان ال 
+                score 
+                يجب ان يتم التحقق منه في كل مرة يتم سحب ورقة 
+                والتحقق في التلميح التاسع يجب ان تكرر ايضا حتى نهاية اللعبة
+            </p>
+            <p>
+                في درس سابق اضفنا علم 
+                flage 
+                وهو المتغير 
+                is_game_over 
+                وكانت قيمته الابتدائية 
+                False
+                ولكن لم يكن له فائدة 
+                الان سوف نستخدمه لكي نضيف حلقة 
+                while 
+                للعبة الخاصة بنا وهذا العلم سوف يحدد ان انتهت اللعبة او لا
+            </p>
+            <pre><code>
+while not is_game_over:
+    
+    user_score = calculate_score(user_cards)
+    computer_score = calculate_score(computer_cards)
+    print(f"   Your cards: {user_cards}, current score: {user_score}")
+    print(f"   Computer's first card: {computer_cards[0]}")
+
+    if user_score == 0 or computer_score == 0 or user_score > 21:
+        is_game_over = True
+    else:
+      
+        user_should_deal = input("Type 'y' to get another card, type 'n' to pass: ")
+        if user_should_deal == "y":
+            user_cards.append(deal_card())
+        else:
+            is_game_over = True
+            </code></pre>
+            <p>
+                نتيجة الكود حتى الان: 
+            </p>
+            <pre><code>
+    Your cards: [10, 10], current score: 20
+    Computer's first card: 10
+Type 'y' to get another card, type 'n' to pass: y
+    Your cards: [10, 10, 2], current score: 22
+    Computer's first card: 10
+            </code></pre>
+            <p>
+                حل التلميح رقم 
+                12
+                عندما ينتهي الاعب من دوره حان وقت الكمبيوتر لكي يلعب وعليه 
+                ان يبقى يسحب في الاوراق مادام ال 
+                score 
+                الخاص به تحت 
+                17
+            </p>
+            <p>
+                ولكن 
+                0
+                ايضا اقل من 
+                17
+                ولكننا لا نريد ان يسحب ان كان عنده بلاك جاك
+            </p>
+            <p>
+                بعد نهاية حلقة ال 
+                while 
+                الخاصة باللاعب سوف نضيف حلقة اخرى خاصة بالكمبيوتر
+            </p>
+            <p>
+                فاكتب مادام انه ال 
+                score 
+                الخاص بالكمبيوتر لا يساوي 
+                0 
+                و 
+                ايضا اقل من 
+                17
+                في تلك الحالة اضف ورقة الى قائمة اوراق الكمبيوتر
+                واعد حساب ال 
+                score 
+            </p>
+            <pre><code>
+while computer_score != 0 and computer_score < 17:
+    computer_cards.append(deal_card())
+    computer_score = calculate_score(computer_cards)
+            </code></pre>
+        </div>
+    </div>
+</body>
+
+</html>
