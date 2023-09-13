@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>حل التلميح الثالث عشر</title>
+</head>
+
+<body>
+    <div class="book-page">
+        <h1 class="book-title">حل التلميح الثالث عشر</h1>
+        <div class="content">
+           <p>
+            حتى الان لدينا حلقتان 
+            while 
+            واحدة لللاعب والاخرى للكمبيوتر
+            الان سوف نقوم بحل التلميح رقم 
+            13
+            الذي فيه سوف نقوم بكتابة دالة تسمى 
+            compare
+            ونمرر لها ال 
+            score 
+            الخاص باللاعب والكمبيوتر 
+            وسوف ترجع لنا الفائز
+           </p>
+           <p>
+            تذكر دائما انه لمنادات دالة يجب ان يتم تعريفها قبل السطر الذي ننادي فيه الدالة 
+            باسمها و سوف نحدد الفائز بناءا على هذه الخطوات التالية:
+           </p>
+           <ul>
+            <li>
+                اذا كان للاعب والكمبيوتر نفس ال 
+                score 
+                اذا تعادل
+            </li>
+            <li>
+                اذا كان للكمبيوتر بلاك جاك اذن اللاعب يخسر
+            </li>
+            <li>
+                اذا كان للالعب بلاك جاك اذن اللاعب يربح
+            </li>
+            <li>
+                اذا كان ال
+                score 
+                الخاص باللاعب فوق 
+                21
+                اذن اللاعب يخسر 
+            </li>
+            <li>
+                اذا كان 
+                score 
+                الكمبيوتر فوق 
+                21
+                اذن الكمبيوتر يخسر
+            </li>
+            <li>
+                اذا لم يكن مما سبق اذا صاحب اعلى 
+                score 
+                يربح
+            </li>
+           </ul>
+           <pre><code>
+def compare(user_score, computer_score):
+    #Bug fix. If you and the computer are both over, you lose.
+    if user_score > 21 and computer_score > 21:
+        return "You went over. You lose 😤"
+
+
+    if user_score == computer_score:
+        return "Draw 🙃"
+    elif computer_score == 0:
+        return "Lose, opponent has Blackjack 😱"
+    elif user_score == 0:
+        return "Win with a Blackjack 😎"
+    elif user_score > 21:
+        return "You went over. You lose 😭"
+    elif computer_score > 21:
+        return "Opponent went over. You win 😁"
+    elif user_score > computer_score:
+        return "You win 😃"
+    else:
+        return "You lose 😤"
+           </code></pre>
+           <p>
+            تذكر ان عبارة 
+            if elif else 
+            يتم تنفيذها من الاعلى الى الاسفل اي اذا تنفذ شرط ما فان الشروط التي 
+            تحته لا يتم التحقق منها اطلاقا
+           </p>
+           <p>
+            الان بعد ما اكملنا دالة 
+            compare 
+            سوف نستعملها في نهاية الكود الخاص بنا
+            بعدما ينتهي دور اللاعب والكمبيوتر
+            نقوم بمنادات الدالة ونمرر 
+            score 
+            اللاعب والكمبيوتر
+            ونقوم بطباعة مخرج الدالة لانه عبارة عن رسالة 
+            string
+           </p>
+           <pre><code>
+print(compare(user_score, computer_score))
+           </code></pre>
+           <p>
+            سوف اضيف بعض الرسائل في نهاية اللعبة
+           </p>
+           <pre><code>
+print(f"   Your final hand: {user_cards}, final score: {user_score}")
+print(f"   Computer's final hand: {computer_cards}, final score: {computer_score}")
+print(compare(user_score, computer_score))
+           </code></pre>
+           <p>
+            وفي الاخير سوف نسأل اللاعب ان كان يريد ان يبدأ لعبة جديدة
+           </p>
+           <pre><code>
+while input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") == "y":
+    clear()
+    play_game()
+           </code></pre>
+           <p>
+            فاذا اختار اللاعب الحرف 
+            y 
+            سوف نقوم بمنادات الدالة 
+            play_game
+            التي هي دالة فيها  الكود السابق الذي يحتاج ان يكرر لكي نبدأ اللعبة مجددا هكذا: 
+           </p>
+           <pre><code>
+def play_game():
+
+    print(logo)
+
+    user_cards = []
+    computer_cards = []
+    is_game_over = False
+
+    for _ in range(2):
+        user_cards.append(deal_card())
+        computer_cards.append(deal_card())
+
+    while not is_game_over:
+        user_score = calculate_score(user_cards)
+        computer_score = calculate_score(computer_cards)
+        print(f"   Your cards: {user_cards}, current score: {user_score}")
+        print(f"   Computer's first card: {computer_cards[0]}")
+
+        if user_score == 0 or computer_score == 0 or user_score > 21:
+            is_game_over = True
+        else:
+            user_should_deal = input(
+                "Type 'y' to get another card, type 'n' to pass: ")
+            if user_should_deal == "y":
+                user_cards.append(deal_card())
+            else:
+                is_game_over = True
+
+    while computer_score != 0 and computer_score < 17:
+        computer_cards.append(deal_card())
+        computer_score = calculate_score(computer_cards)
+
+    print(f"   Your final hand: {user_cards}, final score: {user_score}")
+    print(
+        f"   Computer's final hand: {computer_cards}, final score: {computer_score}"
+    )
+    print(compare(user_score, computer_score))
+           </code></pre>
+           <p>
+            والدالة 
+            clear 
+            من مكتبة 
+            replit 
+            التي هي متاحة فقط اذا انت مستخدم موقع 
+            replit 
+            لكي نمسح الشاشة
+           </p>
+           <pre><code>
+from replit import clear 
+           </code></pre>
+           <p>
+            وفي بداية الدالة 
+            play_game 
+            سوف نقوم بطباعة اللوغو الخاص باللعبة الذي هو موجود في ملف 
+            art.py 
+            على شكل متغير 
+            logo 
+            وبعد ما قمت بهذه العملية اكثر من مرة في الدروس السابقة اظن ان هذه 
+            العملية اصبحت سهلة عليك الان
+            لا تنسى فقط ان تقوم بعمل 
+            import 
+            لها 
+           </p>
+           <p>
+            الكود الكامل للعبة: 
+           </p>
+           <pre><code>
+import random
+from replit import clear
+from art import logo
+
+
+def deal_card():
+    """Returns a random card from the deck."""
+    cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+    card = random.choice(cards)
+    return card
+
+
+def calculate_score(cards):
+    """Take a list of cards and return the score calculated from the cards"""
+
+    if sum(cards) == 21 and len(cards) == 2:
+        return 0
+
+    if 11 in cards and sum(cards) > 21:
+        cards.remove(11)
+        cards.append(1)
+    return sum(cards)
+
+
+def compare(user_score, computer_score):
+    #Bug fix. If you and the computer are both over, you lose.
+    if user_score > 21 and computer_score > 21:
+        return "You went over. You lose 😤"
+
+    if user_score == computer_score:
+        return "Draw 🙃"
+    elif computer_score == 0:
+        return "Lose, opponent has Blackjack 😱"
+    elif user_score == 0:
+        return "Win with a Blackjack 😎"
+    elif user_score > 21:
+        return "You went over. You lose 😭"
+    elif computer_score > 21:
+        return "Opponent went over. You win 😁"
+    elif user_score > computer_score:
+        return "You win 😃"
+    else:
+        return "You lose 😤"
+
+
+def play_game():
+
+    print(logo)
+
+    user_cards = []
+    computer_cards = []
+    is_game_over = False
+
+    for _ in range(2):
+        user_cards.append(deal_card())
+        computer_cards.append(deal_card())
+
+    while not is_game_over:
+
+        user_score = calculate_score(user_cards)
+        computer_score = calculate_score(computer_cards)
+        print(f"   Your cards: {user_cards}, current score: {user_score}")
+        print(f"   Computer's first card: {computer_cards[0]}")
+
+        if user_score == 0 or computer_score == 0 or user_score > 21:
+            is_game_over = True
+        else:
+
+            user_should_deal = input(
+                "Type 'y' to get another card, type 'n' to pass: ")
+            if user_should_deal == "y":
+                user_cards.append(deal_card())
+            else:
+                is_game_over = True
+
+    while computer_score != 0 and computer_score < 17:
+        computer_cards.append(deal_card())
+        computer_score = calculate_score(computer_cards)
+
+    print(f"   Your final hand: {user_cards}, final score: {user_score}")
+    print(
+        f"   Computer's final hand: {computer_cards}, final score: {computer_score}"
+    )
+    print(compare(user_score, computer_score))
+
+
+while input(
+        "Do you want to play a game of Blackjack? Type 'y' or 'n': ") == "y":
+    clear()
+    play_game()
+           </code></pre>
+        </div>
+    </div>
+</body>
+
+</html>
